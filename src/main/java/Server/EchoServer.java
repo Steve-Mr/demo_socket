@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class EchoServer {
+public class EchoServer extends SimpleServer{
 
     private ServerSocket serverSocket;
     private Socket clientSocket;

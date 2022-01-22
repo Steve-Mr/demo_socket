@@ -15,28 +15,9 @@ public class MainClient {
         }
     }
 
-    private static SimpleClient echoClient;
-
-    public static void setup(){
-        echoClient = new SimpleClient();
-        try {
-            echoClient.startConnection("127.0.0.1", 6666);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void close(){
-        try {
-            echoClient.stopConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void Test_EchoClient(){
         try {
-            echoClient = new SimpleClient();
+            SimpleClient echoClient = new SimpleClient();
             echoClient.startConnection("127.0.0.1", 6666);
             for (int i = 0; i < 5; i++){
                 System.out.println(echoClient.sendMessage("Message " + i));
@@ -47,8 +28,23 @@ public class MainClient {
         }
     }
 
+    public static void Test_Multi(String diff){
+        try {
+            SimpleClient echoClient = new SimpleClient();
+            echoClient.startConnection("127.0.0.1", 6666);
+            for (int i = 0; i < 5; i++){
+                System.out.println(echoClient.sendMessage("Message " + diff + " " + i));
+            }
+            System.out.println(echoClient.sendMessage(" "));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) {
-        Test_EchoClient();
+        Test_Multi("a");
+        Test_Multi("b");
+        Test_Multi("c");
     }
 }

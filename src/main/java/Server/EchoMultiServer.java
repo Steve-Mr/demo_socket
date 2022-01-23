@@ -6,15 +6,24 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class EchoMultiServer extends EchoServer{
+    //多 Client
 
     private ServerSocket serverSocket;
 
     public void start(int port) throws IOException {
         serverSocket = new ServerSocket(port);
+        serverSocket.setSoTimeout(1000*10);
+        //超时关闭
         while (true){
-            new EchoClientHandler(serverSocket.accept()).start();
+            try{
+                new EchoClientHandler(serverSocket.accept()).start();
+            }catch (SocketTimeoutException e){
+                System.out.println("Socket Timed Out");
+                break;
+            }
         }
     }
 
@@ -41,6 +50,7 @@ public class EchoMultiServer extends EchoServer{
                         out.println("closed");
                         break;
                     }
+                    System.out.println("Got from client: " + input);
                     out.println(input);
                 }
 

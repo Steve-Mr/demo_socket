@@ -32,19 +32,21 @@ public class MainClient {
         try {
             SimpleClient echoClient = new SimpleClient();
             echoClient.startConnection("127.0.0.1", 6666);
-            for (int i = 0; i < 5; i++){
-                System.out.println(echoClient.sendMessage("Message " + diff + " " + i));
+            for (int i = 0; i < 10; i++){
+                System.out.println(echoClient.sendMessage("Client " + diff + "/ Message" + i));
+                Thread.sleep(1000);
             }
             System.out.println(echoClient.sendMessage(" "));
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
 
     public static void main(String[] args) {
-        Test_Multi("a");
-        Test_Multi("b");
-        Test_Multi("c");
+        for (int i = 0; i < 2; i++){
+            int finalI = i;
+            new Thread(() -> Test_Multi(String.valueOf(finalI))).start();
+        }
     }
 }

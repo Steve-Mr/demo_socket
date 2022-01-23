@@ -19,8 +19,7 @@ public class SimpleClient {
 
     public String sendMessage(String message) throws IOException {
         out.println(message);
-        String response = in.readLine();
-        return response;
+        return in.readLine();
     }
 
     public void stopConnection() throws IOException {

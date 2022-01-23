@@ -14,7 +14,7 @@ public class MainServer {
     }
 
     public static void main(String[] args) {
-        EchoMultiServer server = new EchoMultiServer();
+        SimpleServer server = new EchoMultiServer();
         Test_Simple(server);
     }
 }

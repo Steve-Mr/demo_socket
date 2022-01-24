@@ -44,7 +44,7 @@ public class MainClient {
 
 
     public static void main(String[] args) {
-        for (int i = 0; i < 2; i++){
+        for (int i = 0; i < 3; i++){
             int finalI = i;
             new Thread(() -> Test_Multi(String.valueOf(finalI))).start();
         }
